@@ -1,5 +1,6 @@
 package com.example.imccalculator
 
+import android.graphics.Color.rgb
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -9,12 +10,14 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
@@ -93,7 +96,7 @@ fun CalculadoraImcScreen(modifier: Modifier = Modifier) {
         }
 
         var categoria = ""
-        var colorCard = Color.Green
+        var colorCard = Color(7, 166, 213)
 
         when {
             imc < 18.5 ->   {
@@ -149,14 +152,20 @@ fun CalculadoraImcScreen(modifier: Modifier = Modifier) {
                         onValueChange = {
                             altura = it
                         },
-                        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
+                        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+                        label = {
+                            Text("Altura")
+                        }
                     )
                     TextField(
                         value = peso,
                         onValueChange = {
                             peso = it
                         },
-                        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
+                        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+                        label = {
+                            Text("Peso")
+                        }
                     )
 
                     Button(
@@ -171,14 +180,22 @@ fun CalculadoraImcScreen(modifier: Modifier = Modifier) {
 
 
             }
-            Card(modifier = Modifier.height(40.dp)
-                .fillMaxWidth(),
+            Card(modifier = Modifier.height(80.dp)
+                .fillMaxWidth()
+                .align(Alignment.CenterHorizontally),
                 colors = CardDefaults.cardColors(
                     containerColor = colorCard
                 )) {
-                Row(modifier = Modifier.fillMaxSize()) {
-                    Text("$imc")
-                    Text(categoria)
+                Row(modifier = Modifier.fillMaxSize(),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.Center) {
+                    Text("$imc",
+                        fontSize = 20.sp,
+                        color = Color.White)
+                    Spacer(modifier = Modifier.width(20.dp))
+                    Text(categoria,
+                        fontSize = 20.sp,
+                        color = Color.White)
                 }
             }
         }
